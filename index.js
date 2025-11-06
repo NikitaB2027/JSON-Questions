@@ -7,39 +7,41 @@ data.forEach(book=>{
 
 });
 
-
+//Question 1
 const avgTime= data.filter(myTime);
 function myTime(book){
-    return book['read?']=="Yes" && book['Time on TBR (days)']!==121.5863014 && book['Time on TBR (years)']!==-121.5863014 && book['Time on TBR (days)']!=="N/A";
+    return book['read?']=="Yes" && book['Time on TBR (years)']<110 && book['Time on TBR (years)']>-1 && book['Time on TBR (days)']!=="N/A";
 }
 
 const avgDays= avgTime.reduce((sum,book)=>sum+book['Time on TBR (days)'],0)/avgTime.length;
 
-/*avgTime.forEach(book => {
-  console.log(book['Time on TBR (days)'], typeof book['Time on TBR (days)']);
-});
+console.log("Average time to read a book (in days): "+avgDays);
 
-
-//console.log(avgDays);
-
-
-/*for (let i=0; i<book.length; i++){
-    sum+= book[i]['Time on TBR (days)'];
+//Question 2
+const readbooks= data.filter(myRead);
+function myRead(book){
+    return book['read?']=="Yes";
 }
 
-function avg(value){
-    return sum/value.length;
+const allBooks=data.filter(myAll);
+function myAll(book){
+    return book['read?']=="Yes" || book['read?']=="No";
 }
 
-if(book.myTime){
-    if(book['Time on TBR (years)']=-121.5863014||book['Time on TBR (years)']==121.5863014){
-
-    }
-    else{
-        console.log(book['Time on TBR (days)'].avg);
-    }
+function myPercent(book){
+    return (readbooks.length/allBooks.length)*100;
 }
 
+console.log(readbooks.length);
+console.log(allBooks.length);
+console.log("Percentage of books read: "+myPercent()+"%");
+
+const dateBought= data.filter(myDate);
+function myDate(book){
+    return book['Date Bought']!=="zzzzzz" && book['Date Bought']==Text.length>7;
+}
+
+console.log (dateBought.length);
 /*avg time it takes me to read a book
 % of books that are read
 what are fav genre based on how many purchases
