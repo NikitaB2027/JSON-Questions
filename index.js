@@ -5,6 +5,7 @@ data.forEach(book=>{
     //console.log(book['read?'])
     //console.log(data.avgTime);
 
+
 });
 
 //Question 1
@@ -41,7 +42,35 @@ function myDate(book){
     return book['Date Bought']!=="zzzzzz" && book['Date Bought']==Text.length>7;
 }
 
-console.log (dateBought.length);
+const genreCount={};
+
+data.forEach(book=>{
+    const genre=book.category;
+
+    if(genreCount[genre]){
+        genreCount[genre]+=1;
+    } else {
+        genreCount[genre]=1;
+    }
+});
+
+console.log(genreCount);
+
+let bestGenre=null;
+let maxCount=0;
+
+for (const genre in genreCount){
+    if(genreCount[genre]>maxCount){
+        maxCount=genreCount[genre];
+        bestGenre=genre;
+    }
+}
+//used chatGPT for this function for this question
+
+
+console.log("Favorite genre based on purchases: "+bestGenre);
+
+
 /*avg time it takes me to read a book
 % of books that are read
 what are fav genre based on how many purchases
