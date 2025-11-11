@@ -11,8 +11,10 @@ data.forEach(book=>{
 //Question 1
 const avgTime= data.filter(myTime);
 function myTime(book){
-    return book['read?']=="Yes" && book['Time on TBR (years)']<110 && book['Time on TBR (years)']>-1 && book['Time on TBR (days)']!=="N/A";
+    return book['read?']=="Yes" && book['Time on TBR (years)']<50 && book['Time on TBR (years)']>-1 && book['Time on TBR (days)']!=="N/A" && book['Time on TBR (days)']!=="zzzzzz";
 }
+
+console.log(avgTime)
 
 const avgDays= avgTime.reduce((sum,book)=>sum+book['Time on TBR (days)'],0)/avgTime.length;
 
@@ -66,16 +68,45 @@ for (const genre in genreCount){
     }
 }
 //used chatGPT for this function for this question
-
-
 console.log("Favorite genre based on purchases: "+bestGenre);
+
+const yearCount={};
+data.forEach(book=>{
+    const dateBought=book['Date Bought'];
+    if(dateBought !=="zzzzzz" && dateBought.length>=7){
+        const year=dateBought.slice(-4);
+        if(yearCount[year]){
+            yearCount[year]+=1;
+        } else {
+            yearCount[year]=1;
+        }
+    }
+});
+
+console.log(yearCount);
+
+let mostYear=null;
+let mostCount=0;
+
+for (const year in yearCount){
+    if(yearCount[year]>mostCount){
+        mostCount=yearCount[year];
+        mostYear=year;
+    }
+}
+
+console.log("Year with most books acquired: "+mostYear);
+
+
+
 
 
 /*avg time it takes me to read a book
 % of books that are read
 what are fav genre based on how many purchases
 what year have i acauired the most books
-come up with your own stat*/
+come up with your own stat
+------avg page count of all the books*/
 
 // fetch('./rawBooks.json')
 //     .then((response) => response.json())
