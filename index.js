@@ -97,7 +97,16 @@ for (const year in yearCount){
 
 console.log("Year with most books acquired: "+mostYear);
 
+const avgFilter= data.filter(myFilter);
+function myFilter(book){
+    return book['# Pages']>=1 && book['Time on TBR (days)']!=="zzzzzz";
+}
 
+console.log(avgFilter)
+
+const avgPages= avgFilter.reduce((sum,book)=>sum+book['# Pages'],0)/avgFilter.length;
+
+console.log("Average number of pages in a book: "+avgPages);
 
 
 
